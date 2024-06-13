@@ -1,18 +1,43 @@
 package com.zch.tiny.help;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MongoDBToSQLConverter {
 
-    public static String convert(JsonNode jsonNode) {
+    public static SQLQuery convert(JsonNode jsonNode, List<String> selectFields) {
         StringBuilder sqlWhere = new StringBuilder();
-        convertNode(jsonNode, sqlWhere);
-        return sqlWhere.toString();
+        List<Object> parameters = new ArrayList<>();
+        convertNode(jsonNode, sqlWhere, parameters);
+
+        // Building the SELECT part of the SQL query
+        StringBuilder sqlSelect = new StringBuilder("SELECT ");
+        if (selectFields == null || selectFields.isEmpty()) {
+            sqlSelect.append("*");
+        } else {
+            sqlSelect.append(String.join(", ", selectFields));
+        }
+        sqlSelect.append(" FROM user"); // Assuming the table name is 'users'
+
+        // Combining SELECT and WHERE parts
+        String sql = sqlSelect.toString();
+        if (sqlWhere.length() > 0) {
+            sql += " WHERE " + sqlWhere.toString();
+        }
+
+        // Remove trailing " AND " if present
+        int length = sql.length();
+        if (length > 5 && sql.substring(length - 5).equals(" AND ")) {
+            sql = sql.substring(0, length - 5);
+        }
+
+        return new SQLQuery(sql, parameters);
     }
 
-    private static void convertNode(JsonNode node, StringBuilder sqlWhere) {
+    private static void convertNode(JsonNode node, StringBuilder sqlWhere, List<Object> parameters) {
         if (node.isObject()) {
             node.fields().forEachRemaining(entry -> {
                 String field = entry.getKey();
@@ -24,17 +49,18 @@ public class MongoDBToSQLConverter {
                         if (i > 0) {
                             sqlWhere.append(field.equals("$and") ? " AND " : " OR ");
                         }
-                        convertNode(arrayNode.get(i), sqlWhere);
+                        convertNode(arrayNode.get(i), sqlWhere, parameters);
                     }
                     sqlWhere.append(")");
                 } else if (value.isObject()) {
                     value.fields().forEachRemaining(innerEntry -> {
                         String operator = innerEntry.getKey();
                         JsonNode operand = innerEntry.getValue();
-                        convertCondition(field, operator, operand, sqlWhere);
+                        convertCondition(field, operator, operand, sqlWhere, parameters);
                     });
                 } else {
-                    sqlWhere.append(field).append(" = ").append(formatValue(value)).append(" AND ");
+                    sqlWhere.append(field).append(" = ? AND ");
+                    parameters.add(formatValue(value));
                 }
             });
 
@@ -46,25 +72,47 @@ public class MongoDBToSQLConverter {
         }
     }
 
-    private static void convertCondition(String field, String operator, JsonNode operand, StringBuilder sqlWhere) {
+    private static void convertCondition(String field, String operator, JsonNode operand, StringBuilder sqlWhere, List<Object> parameters) {
         switch (operator) {
             case "$gt":
-                sqlWhere.append(field).append(" > ").append(formatValue(operand)).append(" AND ");
+                sqlWhere.append(field).append(" > ? AND ");
+                parameters.add(formatValue(operand));
                 break;
             case "$lt":
-                sqlWhere.append(field).append(" < ").append(formatValue(operand)).append(" AND ");
+                sqlWhere.append(field).append(" < ? AND ");
+                parameters.add(formatValue(operand));
                 break;
             case "$eq":
-                sqlWhere.append(field).append(" = ").append(formatValue(operand)).append(" AND ");
+                sqlWhere.append(field).append(" = ? AND ");
+                parameters.add(formatValue(operand));
                 break;
             case "$ne":
-                sqlWhere.append(field).append(" != ").append(formatValue(operand)).append(" AND ");
+                sqlWhere.append(field).append(" != ? AND ");
+                parameters.add(formatValue(operand));
                 break;
             case "$in":
-                sqlWhere.append(field).append(" IN (").append(formatArray(operand)).append(") AND ");
+                sqlWhere.append(field).append(" IN (");
+                ArrayNode arrayNode = (ArrayNode) operand;
+                for (int i = 0; i < arrayNode.size(); i++) {
+                    if (i > 0) {
+                        sqlWhere.append(", ");
+                    }
+                    sqlWhere.append("?");
+                    parameters.add(formatValue(arrayNode.get(i)));
+                }
+                sqlWhere.append(") AND ");
                 break;
             case "$nin":
-                sqlWhere.append(field).append(" NOT IN (").append(formatArray(operand)).append(") AND ");
+                sqlWhere.append(field).append(" NOT IN (");
+                arrayNode = (ArrayNode) operand;
+                for (int i = 0; i < arrayNode.size(); i++) {
+                    if (i > 0) {
+                        sqlWhere.append(", ");
+                    }
+                    sqlWhere.append("?");
+                    parameters.add(formatValue(arrayNode.get(i)));
+                }
+                sqlWhere.append(") AND ");
                 break;
             // Add more operators as needed
             default:
@@ -72,28 +120,13 @@ public class MongoDBToSQLConverter {
         }
     }
 
-    private static String formatValue(JsonNode value) {
+    private static Object formatValue(JsonNode value) {
         if (value.isTextual()) {
-            return "'" + value.asText() + "'";
+            return value.asText();
         } else if (value.isNumber()) {
-            return value.toString();
+            return value.numberValue();
         } else {
             throw new UnsupportedOperationException("Unsupported value type: " + value.getNodeType());
-        }
-    }
-
-    private static String formatArray(JsonNode arrayNode) {
-        if (arrayNode.isArray()) {
-            StringBuilder arrayStr = new StringBuilder();
-            for (int i = 0; i < arrayNode.size(); i++) {
-                if (i > 0) {
-                    arrayStr.append(", ");
-                }
-                arrayStr.append(formatValue(arrayNode.get(i)));
-            }
-            return arrayStr.toString();
-        } else {
-            throw new UnsupportedOperationException("Expected array, but got: " + arrayNode.getNodeType());
         }
     }
 }
