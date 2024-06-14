@@ -11,8 +11,10 @@ public class UserDepartment {
     @Id
     @GeneratedValue
     private Integer userId;
+    
     @Column(name = "department_id")
     private Integer departmentId;
+    
 
 
 }

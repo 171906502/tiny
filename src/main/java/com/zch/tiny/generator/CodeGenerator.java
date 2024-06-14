@@ -27,7 +27,7 @@ public class CodeGenerator {
         cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_PATH));
         cfg.setDefaultEncoding("UTF-8");
 
-        boolean clean = true;
+        boolean clean = false;
         
         if (clean){
             List<String> packages = Arrays.asList(new String[]{"model","dto","service","mapper","controller","repository"});

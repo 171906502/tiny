@@ -26,7 +26,10 @@ public class SecurityConfig{
 			)
             .formLogin(formLogin->{
                 Customizer.withDefaults();
-            });
+            })
+			.oauth2ResourceServer(server->{
+				server.jwt(Customizer.withDefaults());
+			});
 			
 		return http.build();
 	}

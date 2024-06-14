@@ -12,16 +12,22 @@ public class Session {
     @Id
     @GeneratedValue
     private String sessionId;
+    
     @Column(name = "user_id")
     private Integer userId;
+    
     @Column(name = "ip_address")
     private String ipAddress;
+    
     @Column(name = "user_agent")
     private String userAgent;
+    
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    
     @Column(name = "expires_at")
     private LocalDateTime expiresAt;
+    
 
 
 }

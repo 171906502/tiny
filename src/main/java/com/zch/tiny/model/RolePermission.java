@@ -11,8 +11,10 @@ public class RolePermission {
     @Id
     @GeneratedValue
     private Integer roleId;
+    
     @Column(name = "permission_id")
     private Integer permissionId;
+    
 
 
 }

@@ -7,11 +7,18 @@ import java.time.*;
 public class AccessLogDto {
 
     private Integer access_id;
+    
     private Integer user_id;
+    
     private String ip_address;
+    
     private String request_url;
+    
     private String request_method;
+    
     private Integer response_status;
+    
     private LocalDateTime created_at;
+    
 
 }

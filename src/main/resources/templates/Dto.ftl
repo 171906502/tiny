@@ -13,6 +13,7 @@ public class ${className}Dto {
 
 <#list fields as field>
     private ${field?split(":")[1]} ${field?split(":")[0]};
+    
 </#list>
 
 }

@@ -6,6 +6,8 @@ import lombok.Data;
 public class RolePermissionDto {
 
     private Integer role_id;
+    
     private Integer permission_id;
+    
 
 }

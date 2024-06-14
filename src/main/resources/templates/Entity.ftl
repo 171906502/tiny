@@ -22,6 +22,7 @@ public class ${className} {
     @Column(name = "${field?split(":")[0]}")
     </#if>
     private ${field?split(":")[1]} ${field?split(":")[3]};
+    
 </#list>
 
 

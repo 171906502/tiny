@@ -6,6 +6,8 @@ import lombok.Data;
 public class UserDepartmentDto {
 
     private Integer user_id;
+    
     private Integer department_id;
+    
 
 }

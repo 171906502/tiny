@@ -11,8 +11,10 @@ public class UserRole {
     @Id
     @GeneratedValue
     private Integer userId;
+    
     @Column(name = "role_id")
     private Integer roleId;
+    
 
 
 }
