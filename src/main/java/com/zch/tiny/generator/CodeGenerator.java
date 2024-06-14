@@ -80,6 +80,14 @@ public class CodeGenerator {
                 // }
                 String columnName = columns.getString("COLUMN_NAME");
                 String javaType = sqlTypeToJavaType(columns.getString("TYPE_NAME"));
+                if(javaType.equals("BigDecimal")){
+                    data.put("bigDecimal", 1);
+                }
+
+                if(javaType.contains("LocalDate")){
+                    data.put("localDate", 1);
+                }
+                
                 fieldsBuilder.append(columnName).append(":").append(javaType);
                 if (columnName.equals(primaryKeyColumn)){
                     fieldsBuilder.append(":PrimaryKey");

@@ -1,15 +1,17 @@
 package ${packageName};
 
-import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import lombok.Data;
+<#if bigDecimal?? && bigDecimal == 1>
 import java.math.BigDecimal;
+</#if>
+<#if localDate?? && localDate == 1>
+import java.time.*;
+</#if>
 
 @Data
 public class ${className}Dto {
 
 <#list fields as field>
-    @NotNull
     private ${field?split(":")[1]} ${field?split(":")[0]};
 </#list>
 

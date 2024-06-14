@@ -1,9 +1,7 @@
 package com.zch.tiny.model;
 
-import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.math.BigDecimal;
 
 @Data
 @Entity

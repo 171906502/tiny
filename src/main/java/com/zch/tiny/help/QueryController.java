@@ -1,12 +1,10 @@
-package com.zch.tiny.controller;
+package com.zch.tiny.help;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zch.tiny.help.MongoDBToSQLConverter;
-import com.zch.tiny.help.SQLQuery;
 
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,13 @@
 package ${packageName};
 
-import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.Data;
+<#if bigDecimal?? && bigDecimal == 1>
 import java.math.BigDecimal;
+</#if>
+<#if localDate?? && localDate == 1>
+import java.time.*;
+</#if>
 
 @Data
 @Entity
