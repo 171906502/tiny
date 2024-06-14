@@ -49,6 +49,9 @@ public class SecurityConfig{
 				cors.disable();
 			})
 			.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
+                .requestMatchers("v3/api-docs/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
 				.anyRequest().authenticated()
 			)
