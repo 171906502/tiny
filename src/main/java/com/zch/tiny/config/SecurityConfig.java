@@ -22,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
-import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
@@ -53,6 +52,7 @@ public class SecurityConfig{
                 .requestMatchers("/swagger-ui.html").permitAll()
                 .requestMatchers("v3/api-docs/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/actuator/**").permitAll()
 				.anyRequest().authenticated()
 			)
             .formLogin(formLogin->{
