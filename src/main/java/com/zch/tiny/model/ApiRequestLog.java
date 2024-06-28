@@ -10,7 +10,7 @@ import java.time.*;
 public class ApiRequestLog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer requestId;
     
     @Column(name = "user_id")

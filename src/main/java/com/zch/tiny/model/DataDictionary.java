@@ -10,7 +10,7 @@ import java.time.*;
 public class DataDictionary {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dictionaryId;
     
     @Column(name = "dict_type")

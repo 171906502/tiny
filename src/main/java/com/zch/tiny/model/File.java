@@ -10,7 +10,7 @@ import java.time.*;
 public class File {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer fileId;
     
     @Column(name = "file_name")

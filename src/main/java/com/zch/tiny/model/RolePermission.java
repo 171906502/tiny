@@ -9,7 +9,7 @@ import lombok.Data;
 public class RolePermission {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
     
     @Column(name = "permission_id")

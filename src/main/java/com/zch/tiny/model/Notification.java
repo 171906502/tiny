@@ -10,7 +10,7 @@ import java.time.*;
 public class Notification {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer notificationId;
     
     @Column(name = "user_id")

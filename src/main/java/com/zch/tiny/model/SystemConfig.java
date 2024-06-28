@@ -10,7 +10,7 @@ import java.time.*;
 public class SystemConfig {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer configId;
     
     @Column(name = "config_key")

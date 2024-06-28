@@ -10,7 +10,7 @@ import java.time.*;
 public class Department {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer departmentId;
     
     @Column(name = "parent_id")

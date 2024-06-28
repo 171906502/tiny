@@ -17,7 +17,7 @@ public class ${className} {
 <#list fields as field>
     <#if field?split(":")[2] == "PrimaryKey">
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     <#else>
     @Column(name = "${field?split(":")[0]}")
     </#if>

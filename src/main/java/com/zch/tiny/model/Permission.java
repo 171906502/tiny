@@ -10,7 +10,7 @@ import java.time.*;
 public class Permission {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer permissionId;
     
     @Column(name = "permission_name")

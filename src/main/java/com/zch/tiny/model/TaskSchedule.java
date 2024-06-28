@@ -10,7 +10,7 @@ import java.time.*;
 public class TaskSchedule {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer scheduleId;
     
     @Column(name = "task_id")

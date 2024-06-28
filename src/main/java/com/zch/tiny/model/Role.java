@@ -10,7 +10,7 @@ import java.time.*;
 public class Role {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
     
     @Column(name = "role_name")

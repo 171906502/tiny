@@ -10,7 +10,7 @@ import java.time.*;
 public class Menu {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer menuId;
     
     @Column(name = "parent_id")

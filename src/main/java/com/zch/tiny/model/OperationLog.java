@@ -10,7 +10,7 @@ import java.time.*;
 public class OperationLog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer logId;
     
     @Column(name = "user_id")
