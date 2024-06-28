@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost/tiny"
+    username: "root"
+    password: "123456"
+  jackson:
+    deserialization:
+      FAIL_ON_IGNORED_PROPERTIES: false
+    serialization:
+      INDENT_OUTPUT: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_BIGDECIMAL_AS_PLAIN: true
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          public-client:
+            registration:
+              client-id: "public-client"
+              client-authentication-methods:
+                - "none"
+              authorization-grant-types:
+                - "authorization_code"
+              redirect-uris:
+                - "http://127.0.0.1:9001"
+              scopes:
+                - "openid"
+                - "profile"
+            require-authorization-consent: true
+            require-proof-key: true
