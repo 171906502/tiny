@@ -4,13 +4,7 @@ spring:
     url: "jdbc:mysql://localhost/tiny"
     username: "root"
     password: "123456"
-  jackson:
-    deserialization:
-      FAIL_ON_IGNORED_PROPERTIES: false
-    serialization:
-      INDENT_OUTPUT: false
-      WRITE_DATES_AS_TIMESTAMPS: false
-      WRITE_BIGDECIMAL_AS_PLAIN: true
+
   security:
     oauth2:
       authorizationserver:
@@ -18,12 +12,15 @@ spring:
           public-client:
             registration:
               client-id: "public-client"
+              client-secret: "$2a$10$h0KujVoYJxn84I0ZecdW0eG9/.HchcWbtC09X1urek64yPZTjI9lO"
               client-authentication-methods:
                 - "none"
+                - "client_secret_post"
               authorization-grant-types:
                 - "authorization_code"
               redirect-uris:
-                - "http://127.0.0.1:9001"
+                - "http://localhost:5173/oidc-callback"
+
               scopes:
                 - "openid"
                 - "profile"
