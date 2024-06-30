@@ -6,7 +6,7 @@ import { createOidc, useOidcStore } from "vue3-oidc";
 const { state } = useOidcStore();
 
 const oidcSettings: VueOidcSettings = {
-  authority: "http://localhost:5173/auth",
+  authority: "http://localhost:5173/sso",
   scope: "openid",
   client_id: "public-client",
   client_secret: "123456",

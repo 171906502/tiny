@@ -11,10 +11,10 @@ export default defineConfig({
   server: {
     cors: true,
     proxy: {
-      "/auth": {
+      "/sso": {
         target: "http://localhost:9002",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/auth/, ""),
+        rewrite: (path) => path.replace(/^\/sso/, ""),
       },
     },
   },

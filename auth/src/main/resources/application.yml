@@ -8,6 +8,7 @@ spring:
   security:
     oauth2:
       authorizationserver:
+        issuer: http://localhost:5173/sso
         client:
           public-client:
             registration:
