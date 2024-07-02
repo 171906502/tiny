@@ -1,3 +1,4 @@
-rootProject.name = 'tiny'
+rootProject.name = 'cloud-tiny'
 
 include("auth")
+include("tiny")
