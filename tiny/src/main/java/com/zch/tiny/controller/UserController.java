@@ -1,53 +1,60 @@
-// package com.zch.tiny.controller;
+ package com.zch.tiny.controller;
 
-// import com.zch.tiny.dto.UserDto;
-// import com.zch.tiny.model.User;
-// import com.zch.tiny.service.UserService;
-// import com.zch.tiny.mapper.UserMapper;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.*;
+ import com.zch.tiny.model.User;
+ import com.zch.tiny.service.UserService;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
-// import java.util.Optional;
-// import java.util.stream.Collectors;
+ import java.util.List;
+ import java.util.Optional;
+ @RestController
+ @RequestMapping("/api/users")
+ public class UserController {
+     @Autowired
+     private UserService userService;
 
-// @RestController
-// @RequestMapping("/users")
-// public class UserController {
+     @PostMapping
+     public ResponseEntity<User> createUser(@RequestBody User user) {
+         User createdUser = userService.createUser(user);
+         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+     }
 
-// @Autowired
-// private UserService service;
+     @PutMapping("/{id}")
+     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
+         user.setUserId(id);
+         User updatedUser = userService.updateUser(user);
+         return ResponseEntity.ok(updatedUser);
+     }
 
-// private final UserMapper mapper = UserMapper.INSTANCE;
+     @DeleteMapping("/{id}")
+     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+         userService.deleteUser(id);
+         return ResponseEntity.noContent().build();
+     }
 
-// @GetMapping
-// public List<UserDto> findAll() {
-// return service.findAll().stream()
-// .map(mapper::toDto)
-// .collect(Collectors.toList());
-// }
+     @GetMapping("/{id}")
+     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+         Optional<User> user = userService.getUserById(id);
+         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+     }
 
-// @GetMapping("/{id}")
-// public Optional<UserDto> findById(@PathVariable Integer id) {
-// return service.findById(id).map(mapper::toDto);
-// }
+     @GetMapping
+     public ResponseEntity<List<User>> getAllUsers() {
+         List<User> users = userService.getAllUsers();
+         return ResponseEntity.ok(users);
+     }
 
-// @PostMapping
-// public UserDto save(@RequestBody UserDto dto) {
-// User entity = mapper.toEntity(dto);
-// return mapper.toDto(service.save(entity));
-// }
+     @PostMapping("/{id}/departments/{departmentId}")
+     public ResponseEntity<Void> assignUserToDepartment(@PathVariable Integer id, @PathVariable Integer departmentId) {
+         userService.assignUserToDepartment(id, departmentId);
+         return ResponseEntity.noContent().build();
+     }
 
-// @DeleteMapping("/{id}")
-// public void deleteById(@PathVariable Integer id) {
-// service.deleteById(id);
-// }
-
-// @PostMapping("/search")
-// public List<UserDto> findByExample(@RequestBody UserDto dto) {
-// User example = mapper.toEntity(dto);
-// return service.findByExample(example).stream()
-// .map(mapper::toDto)
-// .collect(Collectors.toList());
-// }
-// }
+     @PostMapping("/{id}/roles/{roleId}")
+     public ResponseEntity<Void> assignUserToRole(@PathVariable Integer id, @PathVariable Integer roleId) {
+         userService.assignUserToRole(id, roleId);
+         return ResponseEntity.noContent().build();
+     }
+ }
