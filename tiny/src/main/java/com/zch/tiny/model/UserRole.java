@@ -3,18 +3,18 @@ package com.zch.tiny.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "user_role")
+@Data
 public class UserRole {
+    @EmbeddedId
+    private UserRoleId id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
-    
-    @Column(name = "role_id")
-    private Integer roleId;
-    
+    @ManyToOne
+    @MapsId("userId")
+    private User user;
 
-
+    @ManyToOne
+    @MapsId("roleId")
+    private Role role;
 }

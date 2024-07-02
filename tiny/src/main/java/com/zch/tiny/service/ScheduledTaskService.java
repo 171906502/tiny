@@ -18,7 +18,7 @@ public class ScheduledTaskService {
         return repository.findAll();
     }
 
-    public Optional<ScheduledTask> findById(Long id) {
+    public Optional<ScheduledTask> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ScheduledTaskService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

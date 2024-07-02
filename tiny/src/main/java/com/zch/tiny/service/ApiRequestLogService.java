@@ -18,7 +18,7 @@ public class ApiRequestLogService {
         return repository.findAll();
     }
 
-    public Optional<ApiRequestLog> findById(Long id) {
+    public Optional<ApiRequestLog> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ApiRequestLogService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

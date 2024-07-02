@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class RolePermissionDto {
 
-    private Integer role_id;
-    
-    private Integer permission_id;
-    
+    private Integer roleId;    
+    private Integer permissionId;    
 
 }

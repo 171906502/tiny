@@ -13,7 +13,7 @@ import com.zch.tiny.model.User;
 import com.zch.tiny.repository.UserRepository;
 
 @Component
-public class UserDetailService implements UserDetailsService{
+public class UserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
@@ -21,12 +21,12 @@ public class UserDetailService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User eu = new User();
         eu.setUsername(username);
-        Optional<User> user =  userRepository.findBy(Example.of(eu), q->q.one());
-        if (user.isPresent()){
+        Optional<User> user = userRepository.findBy(Example.of(eu), q -> q.one());
+        if (user.isPresent()) {
             return user.get();
-        }else{
+        } else {
             throw new UsernameNotFoundException(username);
         }
     }
-    
+
 }

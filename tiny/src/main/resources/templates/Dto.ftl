@@ -12,8 +12,7 @@ import java.time.*;
 public class ${className}Dto {
 
 <#list fields as field>
-    private ${field?split(":")[1]} ${field?split(":")[0]};
-    
+    private ${field?split(":")[1]} ${field?split(":")[3]};    
 </#list>
 
 }

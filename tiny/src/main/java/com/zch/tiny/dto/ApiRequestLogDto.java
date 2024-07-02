@@ -6,21 +6,13 @@ import java.time.*;
 @Data
 public class ApiRequestLogDto {
 
-    private Integer request_id;
-    
-    private Integer user_id;
-    
-    private String api_endpoint;
-    
-    private String request_method;
-    
-    private String request_params;
-    
-    private Integer response_status;
-    
-    private String response_body;
-    
-    private LocalDateTime created_at;
-    
+    private Integer requestId;    
+    private Integer userId;    
+    private String apiEndpoint;    
+    private String requestMethod;    
+    private String requestParams;    
+    private Integer responseStatus;    
+    private String responseBody;    
+    private LocalDateTime createdAt;    
 
 }

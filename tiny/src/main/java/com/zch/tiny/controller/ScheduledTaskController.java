@@ -28,7 +28,7 @@ public class ScheduledTaskController {
     }
 
     @GetMapping("/{id}")
-    public Optional<ScheduledTaskDto> findById(@PathVariable Long id) {
+    public Optional<ScheduledTaskDto> findById(@PathVariable Integer id) {
         return service.findById(id).map(mapper::toDto);
     }
 
@@ -39,7 +39,7 @@ public class ScheduledTaskController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Integer id) {
         service.deleteById(id);
     }
 

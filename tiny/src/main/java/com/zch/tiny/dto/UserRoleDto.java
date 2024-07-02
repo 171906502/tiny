@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class UserRoleDto {
 
-    private Integer user_id;
-    
-    private Integer role_id;
-    
+    private Integer userId;    
+    private Integer roleId;    
 
 }

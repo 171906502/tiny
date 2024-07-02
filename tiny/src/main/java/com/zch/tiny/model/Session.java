@@ -10,7 +10,7 @@ import java.time.*;
 public class Session {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String sessionId;
     
     @Column(name = "user_id")

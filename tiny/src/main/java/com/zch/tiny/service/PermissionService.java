@@ -18,7 +18,7 @@ public class PermissionService {
         return repository.findAll();
     }
 
-    public Optional<Permission> findById(Long id) {
+    public Optional<Permission> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class PermissionService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

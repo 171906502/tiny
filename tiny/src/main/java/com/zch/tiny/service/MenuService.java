@@ -18,7 +18,7 @@ public class MenuService {
         return repository.findAll();
     }
 
-    public Optional<Menu> findById(Long id) {
+    public Optional<Menu> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class MenuService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

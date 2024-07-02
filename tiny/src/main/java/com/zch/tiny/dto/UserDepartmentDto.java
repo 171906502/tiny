@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class UserDepartmentDto {
 
-    private Integer user_id;
-    
-    private Integer department_id;
-    
+    private Integer userId;    
+    private Integer departmentId;    
 
 }

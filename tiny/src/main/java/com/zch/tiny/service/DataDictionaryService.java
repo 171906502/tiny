@@ -18,7 +18,7 @@ public class DataDictionaryService {
         return repository.findAll();
     }
 
-    public Optional<DataDictionary> findById(Long id) {
+    public Optional<DataDictionary> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class DataDictionaryService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

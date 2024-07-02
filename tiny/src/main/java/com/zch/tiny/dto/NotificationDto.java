@@ -6,17 +6,11 @@ import java.time.*;
 @Data
 public class NotificationDto {
 
-    private Integer notification_id;
-    
-    private Integer user_id;
-    
-    private String title;
-    
-    private String message;
-    
-    private String is_read;
-    
-    private LocalDateTime created_at;
-    
+    private Integer notificationId;    
+    private Integer userId;    
+    private String title;    
+    private String message;    
+    private String isRead;    
+    private LocalDateTime createdAt;    
 
 }

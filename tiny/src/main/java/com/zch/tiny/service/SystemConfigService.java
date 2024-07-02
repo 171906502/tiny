@@ -18,7 +18,7 @@ public class SystemConfigService {
         return repository.findAll();
     }
 
-    public Optional<SystemConfig> findById(Long id) {
+    public Optional<SystemConfig> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class SystemConfigService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

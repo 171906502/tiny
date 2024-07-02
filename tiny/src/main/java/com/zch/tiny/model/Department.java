@@ -3,6 +3,8 @@ package com.zch.tiny.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -30,7 +32,9 @@ public class Department {
     
     @Column(name = "status")
     private String status;
-    
 
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserDepartment> userDepartments = new HashSet<>();
 
 }

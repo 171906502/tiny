@@ -18,7 +18,7 @@ public class AccessLogService {
         return repository.findAll();
     }
 
-    public Optional<AccessLog> findById(Long id) {
+    public Optional<AccessLog> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class AccessLogService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

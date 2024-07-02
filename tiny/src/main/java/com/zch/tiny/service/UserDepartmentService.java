@@ -18,7 +18,7 @@ public class UserDepartmentService {
         return repository.findAll();
     }
 
-    public Optional<UserDepartment> findById(Long id) {
+    public Optional<UserDepartment> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class UserDepartmentService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

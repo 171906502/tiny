@@ -6,19 +6,12 @@ import java.time.*;
 @Data
 public class DepartmentDto {
 
-    private Integer department_id;
-    
-    private Integer parent_id;
-    
-    private String department_name;
-    
-    private String description;
-    
-    private LocalDateTime created_at;
-    
-    private LocalDateTime updated_at;
-    
-    private String status;
-    
+    private Integer departmentId;    
+    private Integer parentId;    
+    private String departmentName;    
+    private String description;    
+    private LocalDateTime createdAt;    
+    private LocalDateTime updatedAt;    
+    private String status;    
 
 }

@@ -18,7 +18,7 @@ public class OperationLogService {
         return repository.findAll();
     }
 
-    public Optional<OperationLog> findById(Long id) {
+    public Optional<OperationLog> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class OperationLogService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

@@ -18,7 +18,7 @@ public class RolePermissionService {
         return repository.findAll();
     }
 
-    public Optional<RolePermission> findById(Long id) {
+    public Optional<RolePermission> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class RolePermissionService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

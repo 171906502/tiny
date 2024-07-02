@@ -6,19 +6,12 @@ import java.time.*;
 @Data
 public class PermissionDto {
 
-    private Integer permission_id;
-    
-    private String permission_name;
-    
-    private String permission_code;
-    
-    private String description;
-    
-    private LocalDateTime created_at;
-    
-    private LocalDateTime updated_at;
-    
-    private String status;
-    
+    private Integer permissionId;    
+    private String permissionName;    
+    private String permissionCode;    
+    private String description;    
+    private LocalDateTime createdAt;    
+    private LocalDateTime updatedAt;    
+    private String status;    
 
 }

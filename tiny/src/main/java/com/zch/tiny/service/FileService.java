@@ -18,7 +18,7 @@ public class FileService {
         return repository.findAll();
     }
 
-    public Optional<File> findById(Long id) {
+    public Optional<File> findById(Integer id) {
         return repository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class FileService {
         return repository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 

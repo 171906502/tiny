@@ -28,12 +28,12 @@ public class Init {
         log.info("add init admin user");
         return new CommandLineRunner() {
             public void run(String... args) throws Exception{
-                if (!repository.findOne(Example.of(new User())).isPresent()){
-                    User u = new User();
-                    u.setUsername("admin");
-                    u.setPassword(passwordEncoder.encode("123456"));
-                    repository.save(u);
-                }
+                User u  =new User();
+                u.setUsername("admin");
+//                if (!repository.findOne(Example.of(u)).isPresent()){
+//                    u.setPassword(passwordEncoder.encode("123456"));
+//                    repository.save(u);
+//                }
             }
         };
     }
