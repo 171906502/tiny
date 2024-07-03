@@ -13,3 +13,16 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+#        security:
+#          oauth2: TRACE
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE

@@ -30,10 +30,10 @@ public class Init {
             public void run(String... args) throws Exception{
                 User u  =new User();
                 u.setUsername("admin");
-//                if (!repository.findOne(Example.of(u)).isPresent()){
-//                    u.setPassword(passwordEncoder.encode("123456"));
-//                    repository.save(u);
-//                }
+                if (!repository.findOne(Example.of(u)).isPresent()){
+                    u.setPassword(passwordEncoder.encode("123456"));
+                    repository.save(u);
+                }
             }
         };
     }

@@ -1,10 +1,12 @@
 package com.zch.tiny.controller;
 
 import com.zch.tiny.dto.SessionDto;
+import com.zch.tiny.help.SessionHelp;
 import com.zch.tiny.model.Session;
 import com.zch.tiny.service.SessionService;
 import com.zch.tiny.mapper.SessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,5 +51,10 @@ public class SessionController {
         return service.findByExample(example).stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/me")
+    public UserDetails curUser(){
+        return SessionHelp.getCurUser();
     }
 }

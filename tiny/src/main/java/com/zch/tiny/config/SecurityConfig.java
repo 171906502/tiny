@@ -51,9 +51,10 @@ public class SecurityConfig{
                 .requestMatchers("swagger-ui/**").permitAll()
                 .requestMatchers("/swagger-ui.html").permitAll()
                 .requestMatchers("v3/api-docs/**").permitAll()
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/auth/*").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
-				.anyRequest().authenticated()
+//				.anyRequest().authenticated()
+                            .anyRequest().permitAll()
 			)
             .formLogin(formLogin->{
                 Customizer.withDefaults();

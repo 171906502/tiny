@@ -1,10 +1,14 @@
  package com.zch.tiny.controller;
 
+ import com.zch.tiny.dto.UserDto;
+ import com.zch.tiny.mapper.PermissionMapper;
+ import com.zch.tiny.mapper.UserMapper;
  import com.zch.tiny.model.User;
  import com.zch.tiny.service.UserService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.http.HttpStatus;
  import org.springframework.http.ResponseEntity;
+ import org.springframework.validation.annotation.Validated;
  import org.springframework.web.bind.annotation.*;
 
  import java.util.List;
@@ -15,9 +19,11 @@
      @Autowired
      private UserService userService;
 
+     private final UserMapper userMapper = UserMapper.INSTANCE;
+
      @PostMapping
-     public ResponseEntity<User> createUser(@RequestBody User user) {
-         User createdUser = userService.createUser(user);
+     public ResponseEntity<User> createUser(@Validated @RequestBody UserDto user) {
+         User createdUser = userService.createUser(userMapper.toEntity(user));
          return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
      }
 

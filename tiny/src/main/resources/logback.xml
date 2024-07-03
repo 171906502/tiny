@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="LOG_FILE" value="./logs/tiny.log" />
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+</configuration>
