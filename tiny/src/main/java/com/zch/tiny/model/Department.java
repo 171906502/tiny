@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -35,6 +38,11 @@ public class Department {
 
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<UserDepartment> userDepartments = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "departmentId", insertable = false, updatable = false)
+    private List<Department> children;
 
 }

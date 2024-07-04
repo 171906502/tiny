@@ -11,5 +11,9 @@ public interface DepartmentMapper {
 
     Department toEntity(DepartmentDto dto);
 
+    // @Mappings({
+    //     // 忽略 children 字段的映射
+    //     @Mapping(target = "children", ignore = true)
+    // })
     DepartmentDto toDto(Department entity);
 }
