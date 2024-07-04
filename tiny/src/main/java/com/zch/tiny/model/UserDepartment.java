@@ -12,10 +12,12 @@ public class UserDepartment {
 
     @ManyToOne
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
     @MapsId("departmentId")
+    @JoinColumn(name = "department_id")
     private Department department;
 }
 
