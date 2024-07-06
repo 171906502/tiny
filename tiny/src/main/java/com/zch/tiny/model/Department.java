@@ -37,9 +37,9 @@ public class Department {
     private String status;
 
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Set<UserDepartment> userDepartments = new HashSet<>();
+    // @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonIgnore
+    // private Set<UserDepartment> userDepartments = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "departmentId", insertable = false, updatable = false)

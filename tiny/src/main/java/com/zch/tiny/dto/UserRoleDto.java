@@ -8,4 +8,6 @@ public class UserRoleDto {
     private Integer userId;    
     private Integer roleId;    
 
+    private RoleDto role;
+    private UserDto user;
 }

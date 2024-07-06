@@ -2,3 +2,4 @@ rootProject.name = 'cloud-tiny'
 
 include("auth")
 include("tiny")
+include("embd")

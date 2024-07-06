@@ -25,7 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleAllExceptions(Exception ex) {
         log.warn("未处理异常");
         log.warn( "An error occurred: " + ex.getClass() + " " + ex.getMessage() );
-        ex.printStackTrace();
+        log.error("unkonw exception: ",ex);
         return new ResponseEntity<String>(ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
 

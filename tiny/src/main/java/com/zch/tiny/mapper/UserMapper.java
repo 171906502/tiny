@@ -10,9 +10,9 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(target = "userDepartments", ignore = true)
-    @Mapping(target = "userRoles", ignore = true)
-    @Mapping(target = "authorities", ignore = true)
+    // @Mapping(target = "userDepartments", ignore = true)
+    // @Mapping(target = "userRoles", ignore = true)
+    // @Mapping(target = "authorities", ignore = true)
     User toEntity(UserDto dto);
 
     UserDto toDto(User entity);

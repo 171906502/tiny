@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zch.tiny.model.UserDepartment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +26,6 @@ public class DepartmentDto {
     private LocalDateTime updatedAt;    
     private String status;    
     private List<DepartmentDto> children;
-    private Set<UserDepartment> userDepartments = new HashSet<>();
+    // private Set<UserDepartment> userDepartments = new HashSet<>();
 
 }

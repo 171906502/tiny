@@ -29,7 +29,7 @@
 
      @PutMapping("/{id}")
      public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-         user.setUserId(id);
+         user.setId(id);
          User updatedUser = userService.updateUser(user);
          return ResponseEntity.ok(updatedUser);
      }
@@ -43,7 +43,9 @@
      @GetMapping("/{id}")
      public ResponseEntity<User> getUserById(@PathVariable Integer id) {
          Optional<User> user = userService.getUserById(id);
-         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+         var u =user.get();
+        //  return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(u);
      }
 
      @GetMapping
@@ -60,7 +62,7 @@
 
      @PostMapping("/{id}/roles/{roleId}")
      public ResponseEntity<Void> assignUserToRole(@PathVariable Integer id, @PathVariable Integer roleId) {
-         userService.assignUserToRole(id, roleId);
+         userService.assignRoleToUser(id, roleId);
          return ResponseEntity.noContent().build();
      }
  }

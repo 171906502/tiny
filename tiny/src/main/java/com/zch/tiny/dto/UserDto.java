@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class UserDto {
 
-    private Integer userId;
+    private Integer id;
     private String username;    
     private String password;
     @NotBlank
@@ -18,5 +20,7 @@ public class UserDto {
     private LocalDateTime createdAt;    
     private LocalDateTime updatedAt;
     private Byte status;
+
+    private Set<UserRoleDto> userRoles = new HashSet<>();
 
 }

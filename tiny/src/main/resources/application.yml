@@ -24,5 +24,3 @@ logging:
             CommonsRequestLoggingFilter: DEBUG
 #        security:
 #          oauth2: TRACE
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type: TRACE
