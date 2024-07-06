@@ -64,12 +64,8 @@ public class UserService {
         Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
 
-        UserDepartment userDepartment = new UserDepartment();
-        userDepartment.setId(new UserDepartmentId(userId, departmentId));
-        userDepartment.setUser(user);
-        userDepartment.setDepartment(department);
-
-        userDepartmentRepository.save(userDepartment);
+        user.addDepartment(department);
+        userRepository.save(user);
     }
 
     public void assignRoleToUser(int userId, int roleId) {
@@ -86,7 +82,7 @@ public class UserService {
             userRole.setUserRoleId(key);
             userRoleRepository.save(userRole);
         }
-        userRepository.save(user);
+        // userRepository.save(user);
     }
 
     public void revokeRoleFromUser(int userId, int roleId) {

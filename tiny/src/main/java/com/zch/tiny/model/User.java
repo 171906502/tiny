@@ -55,6 +55,20 @@ public class User {
     private Set<UserRole> userRoles = new HashSet<>();
 
     
+    // Helper methods to manage bi-directional relationship
+    public void addDepartment(Department department) {
+        for (UserDepartment userDepartment : userDepartments) {
+            if (userDepartment.getDepartment().getDepartmentId().equals(department.getDepartmentId())) {
+                return; // 已存在，不添加
+            }
+        }
+        UserDepartment userDepartment = new UserDepartment();
+        userDepartment.setUser(this);
+        userDepartment.setDepartment(department);
+        userDepartments.add(userDepartment);
+        department.getUserDepartments().add(userDepartment);
+
+    }
 
     // Helper methods to manage bi-directional relationship
     public void addRole(Role role) {
