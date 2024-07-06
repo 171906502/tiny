@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +25,10 @@ public class DepartmentDto {
     private LocalDateTime createdAt;    
     private LocalDateTime updatedAt;    
     private String status;    
+
     private List<DepartmentDto> children;
-    // private Set<UserDepartment> userDepartments = new HashSet<>();
+
+    @JsonManagedReference
+    private Set<UserDepartmentDto> userDepartments = new HashSet<>();
 
 }

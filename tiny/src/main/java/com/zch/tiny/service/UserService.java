@@ -56,31 +56,20 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        // User u2 = userRepository.findById(Integer.valueOf(1)).get();
-        // // log.info(u2.getUserRoles().toString());
-        // u2.addRole(roleRepository.findById(1).get());
-        // u2= userRepository.save(u2);
-        // // log.info(u2.getUserRoles().toString());
-        assignRoleToUser(2, 1);
-        var ll = userRepository.findAll();
-
-        ll.forEach(e->{
-            e.getUserRoles();
-        });
-        return ll;
+        return userRepository.findAll();
     }
 
     public void assignUserToDepartment(Integer userId, Integer departmentId) {
-        // User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        // Department department = departmentRepository.findById(departmentId)
-        //         .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
 
-        // UserDepartment userDepartment = new UserDepartment();
-        // userDepartment.setId(new UserDepartmentId(userId, departmentId));
-        // userDepartment.setUser(user);
-        // userDepartment.setDepartment(department);
+        UserDepartment userDepartment = new UserDepartment();
+        userDepartment.setId(new UserDepartmentId(userId, departmentId));
+        userDepartment.setUser(user);
+        userDepartment.setDepartment(department);
 
-        // userDepartmentRepository.save(userDepartment);
+        userDepartmentRepository.save(userDepartment);
     }
 
     public void assignRoleToUser(int userId, int roleId) {
