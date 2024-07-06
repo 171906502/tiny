@@ -26,7 +26,7 @@ public class User {
         userRole.setUser(this);
         userRole.setRole(role);
         roles.add(userRole);
-        // role.getUserRoles().add(userRole);
+        role.getUserRoles().add(userRole);
     }
 
     public void removeRole(Role role) {

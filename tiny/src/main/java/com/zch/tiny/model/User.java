@@ -58,11 +58,16 @@ public class User {
 
     // Helper methods to manage bi-directional relationship
     public void addRole(Role role) {
+        for (UserRole userRole : userRoles) {
+            if (userRole.getRole().getRoleId().equals(role.getRoleId())) {
+                return; // 如果角色已存在，不添加
+            }
+        }
         UserRole userRole = new UserRole();
         userRole.setUser(this);
         userRole.setRole(role);
         userRoles.add(userRole);
-        // role.getUserRoles().add(userRole);
+        role.getUserRoles().add(userRole);
     }
 
     public void removeRole(Role role) {
@@ -77,7 +82,5 @@ public class User {
         }
     }
 
-
-    
 
 }

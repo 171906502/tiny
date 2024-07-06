@@ -56,12 +56,14 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        User u2 = userRepository.findById(Integer.valueOf(1)).get();
-        // log.info(u2.getUserRoles().toString());
-        u2.addRole(roleRepository.findById(1).get());
-        u2= userRepository.save(u2);
-        // log.info(u2.getUserRoles().toString());
+        // User u2 = userRepository.findById(Integer.valueOf(1)).get();
+        // // log.info(u2.getUserRoles().toString());
+        // u2.addRole(roleRepository.findById(1).get());
+        // u2= userRepository.save(u2);
+        // // log.info(u2.getUserRoles().toString());
+        assignRoleToUser(2, 1);
         var ll = userRepository.findAll();
+
         ll.forEach(e->{
             e.getUserRoles();
         });
@@ -84,16 +86,17 @@ public class UserService {
     public void assignRoleToUser(int userId, int roleId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Role role = roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Role not found"));
-
-        // user.getUserRoles().stream().forEach(userRole->{
-        //     if(userRole.getRole().getRoleId().equals(roleId)){
-        //         throw new RuntimeException("User already has this role assigned");
-        //     }
-        // });
-        // var ur = new UserRole();
-        // ur.setUser(user);
-        // ur.setRole(role);
-        // user.getUserRoles().add(ur);
+        UserRoleId key = new UserRoleId();
+        key.setUserId(user.getUserId());
+        key.setRoleId(role.getRoleId());
+        boolean exists = userRoleRepository.existsById(key);
+        if (!exists) {
+            UserRole userRole = new UserRole();
+            userRole.setUser(user);
+            userRole.setRole(role);
+            userRole.setUserRoleId(key);
+            userRoleRepository.save(userRole);
+        }
         userRepository.save(user);
     }
 

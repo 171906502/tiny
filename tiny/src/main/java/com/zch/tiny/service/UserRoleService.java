@@ -18,17 +18,7 @@ public class UserRoleService {
         return repository.findAll();
     }
 
-    public Optional<UserRole> findById(Integer id) {
-        return repository.findById(id);
-    }
 
-    public UserRole save(UserRole entity) {
-        return repository.save(entity);
-    }
-
-    public void deleteById(Integer id) {
-        repository.deleteById(id);
-    }
 
     public List<UserRole> findByExample(UserRole example) {
         // Custom query logic to find entities by example fields
