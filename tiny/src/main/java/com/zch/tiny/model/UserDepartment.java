@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "user_department")
 public class UserDepartment {
     @EmbeddedId
-    private UserDepartmentId id;
+    private UserDepartmentId id = new UserDepartmentId();
 
     @ManyToOne
     @MapsId("userId")
