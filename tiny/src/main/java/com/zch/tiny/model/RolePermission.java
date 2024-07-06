@@ -1,9 +1,12 @@
 package com.zch.tiny.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "role_permission")
 public class RolePermission {

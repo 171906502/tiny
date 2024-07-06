@@ -29,7 +29,7 @@
 
      @PutMapping("/{id}")
      public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-         user.setId(id);
+         user.setUserId(id);
          User updatedUser = userService.updateUser(user);
          return ResponseEntity.ok(updatedUser);
      }

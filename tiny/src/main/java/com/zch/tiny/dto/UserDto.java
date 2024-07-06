@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 public class UserDto {
 
-    private Integer id;
+    private Integer userId;
     private String username;    
     private String password;
     @NotBlank

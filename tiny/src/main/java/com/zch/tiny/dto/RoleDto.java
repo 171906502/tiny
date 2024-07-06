@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 public class RoleDto {
 
-    private Integer id;    
+    private Integer roleId;    
     private String roleName;    
     private String description;    
     private LocalDateTime createdAt;    

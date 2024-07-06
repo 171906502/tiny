@@ -1,10 +1,14 @@
 package com.zch.tiny.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 import java.time.*;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "access_log")
 public class AccessLog {

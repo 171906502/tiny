@@ -40,9 +40,9 @@ public class UserService {
     }
 
     public User updateUser(User updateUser) {
-        var user = userRepository.findById(updateUser.getId()).get();
+        var user = userRepository.findById(updateUser.getUserId()).get();
         BeanUtils.copyPropertiesWithoutNull(user,updateUser);
-        validateUsernameUniqueness(user.getUsername(),user.getId());
+        validateUsernameUniqueness(user.getUsername(),user.getUserId());
         return userRepository.save(user);
     }
     
@@ -113,7 +113,7 @@ public class UserService {
 
     private void validateUsernameUniqueness(String username, int userId) {
         Optional<User> existingUser = userRepository.findByUsername(username);
-        if (existingUser.isPresent() && existingUser.get().getId() != userId) {
+        if (existingUser.isPresent() && existingUser.get().getUserId() != userId) {
             throw new RuntimeException("Username already exists");
         }
     }

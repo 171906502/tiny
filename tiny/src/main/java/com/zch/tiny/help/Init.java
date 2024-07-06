@@ -31,7 +31,7 @@ public class Init {
         return new CommandLineRunner() {
             public void run(String... args) throws Exception{
                 User u  =new User();
-                u.setId(1);
+                u.setUserId(1);
                 u.setUsername("admin");
                 if (!repository.findOne(Example.of(u)).isPresent()){
                     u.setPassword(passwordEncoder.encode("123456"));
