@@ -48,10 +48,11 @@ public class User {
     private Byte status = 1;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user")
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("user")
     private Set<UserRole> userRoles = new HashSet<>();
 
     

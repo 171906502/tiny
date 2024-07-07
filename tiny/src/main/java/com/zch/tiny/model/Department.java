@@ -41,7 +41,7 @@ public class Department {
 
 
     @OneToMany(mappedBy = "department")
-    @JsonManagedReference
+    @JsonManagedReference("department")
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)

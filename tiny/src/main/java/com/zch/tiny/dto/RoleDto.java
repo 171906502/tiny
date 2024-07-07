@@ -5,6 +5,8 @@ import java.time.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Data
 public class RoleDto {
@@ -16,7 +18,8 @@ public class RoleDto {
     private LocalDateTime updatedAt;    
     private String status;    
 
-     private Set<UserRoleDto> userRoles = new HashSet<>();
+    @JsonManagedReference("RoleDto")
+    private Set<UserRoleDto> userRoles = new HashSet<>();
 
 
 }

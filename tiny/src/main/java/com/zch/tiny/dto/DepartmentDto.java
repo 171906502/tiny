@@ -28,7 +28,7 @@ public class DepartmentDto {
 
     private List<DepartmentDto> children;
 
-    @JsonManagedReference
+    @JsonManagedReference("DepartmentDto")
     private Set<UserDepartmentDto> userDepartments = new HashSet<>();
 
 }

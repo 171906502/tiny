@@ -8,11 +8,12 @@ import com.zch.tiny.repository.*;
 
 import lombok.extern.slf4j.Slf4j;
 
-
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,16 +34,35 @@ public class UserService {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
-    public User createUser(User user) {
+    public User createUser(User user) throws BadRequestException {
+        if(user.getUserId()!=null){
+            throw new BadRequestException(String.format("新增用户id必须为空,提交值为:%d", user.getUserId()));
+        }
         validateUsernameUniqueness(user.getUsername());
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(new BCryptPasswordEncoder().encode("123456"));
+        //允许用户同时编辑部门和角色信息
+        user.getUserDepartments().forEach(ud->{
+            var dep = departmentRepository.findById(ud.getId().getDepartmentId());
+            ud.setDepartment(dep.get());
+        });
+        user.getUserRoles().forEach(ur->{
+            var r = roleRepository.findById(ur.getUserRoleId().getRoleId());
+            ur.setRole(r.get());
+        });
         return userRepository.save(user);
     }
 
     public User updateUser(User updateUser) {
+        // 如果 updateUser.userRoles,updateUser.userDepartments 都为空可以直接保存
+        // 如果userRepository.findById实例化user后不能直接set null。
+        // 要移除集合必须通过remove或者clear
         var user = userRepository.findById(updateUser.getUserId()).get();
-        BeanUtils.copyPropertiesWithoutNull(user,updateUser);
+        //不同时更新部门和角色
+        updateUser.setUserDepartments(null);
+        updateUser.setUserRoles(null);
+        BeanUtils.copyPropertiesWithoutNull(updateUser,user);
         validateUsernameUniqueness(user.getUsername(),user.getUserId());
+        // user.getUserRoles().clear();
         return userRepository.save(user);
     }
     
@@ -59,6 +79,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // 一对多或者多对多，两种更新方式，级联更新
     public void assignUserToDepartment(Integer userId, Integer departmentId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Department department = departmentRepository.findById(departmentId)
@@ -68,6 +89,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // 一对多或者多对多，两种更新方式，单独保存中间表
     public void assignRoleToUser(int userId, int roleId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Role role = roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Role not found"));

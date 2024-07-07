@@ -1,13 +1,20 @@
 package com.zch.tiny.dto;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UserRoleDto {
 
-    private Integer userId;    
-    private Integer roleId;    
 
+    private UserRoleIdDto UserRoleId;
+
+    @JsonBackReference("RoleDto")
     private RoleDto role;
+
+    @JsonBackReference("UserDto")
     private UserDto user;
 }

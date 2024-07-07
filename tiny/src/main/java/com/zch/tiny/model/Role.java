@@ -36,7 +36,7 @@ public class Role {
     private String status;
     
     @OneToMany(mappedBy = "role")
-    @JsonManagedReference
+    @JsonManagedReference("role")
     private Set<UserRole> userRoles = new HashSet<>();
     
 

@@ -10,18 +10,18 @@ import lombok.Data;
 @Table(name = "user_role")
 public class UserRole {
     @EmbeddedId
-    private UserRoleId userRoleId = new UserRoleId();
+    private UserRoleId userRoleId = new UserRoleId();//必须有默认值，不然jpa保存会空异常
 
     @ManyToOne()
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference("user")
     private User user;
 
     @ManyToOne()
     @MapsId("roleId")
     @JoinColumn(name = "role_id")
-    @JsonBackReference
+    @JsonBackReference("role")
     private Role role;
 
     public UserRoleId getUserRoleId() {

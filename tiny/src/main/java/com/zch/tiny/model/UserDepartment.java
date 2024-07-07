@@ -12,18 +12,18 @@ import lombok.Setter;
 @Table(name = "user_department")
 public class UserDepartment {
     @EmbeddedId
-    private UserDepartmentId id = new UserDepartmentId();
+    private UserDepartmentId id = new UserDepartmentId();//必须有默认值，不然jpa保存会空异常
 
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference("user")
     private User user;
 
     @ManyToOne
     @MapsId("departmentId")
     @JoinColumn(name = "department_id")
-    @JsonBackReference
+    @JsonBackReference("department")
     private Department department;
 }
 
