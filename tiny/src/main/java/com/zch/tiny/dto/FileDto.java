@@ -13,6 +13,6 @@ public class FileDto {
     private String fileType;    
     private Integer uploadedBy;    
     private LocalDateTime uploadedAt;    
-    private String status;    
+    private byte status;    
 
 }

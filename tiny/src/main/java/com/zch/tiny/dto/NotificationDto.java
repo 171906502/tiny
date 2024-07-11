@@ -10,7 +10,8 @@ public class NotificationDto {
     private Integer userId;    
     private String title;    
     private String message;    
-    private String isRead;    
+    private Boolean isRead;    
     private LocalDateTime createdAt;    
+    private byte status;
 
 }

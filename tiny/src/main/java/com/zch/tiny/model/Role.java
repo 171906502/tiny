@@ -33,9 +33,6 @@ Role {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @Column(name = "status")
-    private String status;
-    
     @OneToMany(mappedBy = "role")
     @JsonManagedReference("role")
     private Set<UserRole> userRoles = new HashSet<>();

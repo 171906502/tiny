@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.*;
 import java.util.List;
 
+import com.zch.tiny.enumeration.MenuTypeEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 

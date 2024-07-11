@@ -1,7 +1,7 @@
 package com.zch.tiny.service;
 
-import com.zch.tiny.Exception.ResourceNotFoundException;
 import com.zch.tiny.dto.UserDto;
+import com.zch.tiny.exception.ResourceNotFoundException;
 import com.zch.tiny.help.BeanUtils;
 import com.zch.tiny.model.*;
 import com.zch.tiny.repository.*;

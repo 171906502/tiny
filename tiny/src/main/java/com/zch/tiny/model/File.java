@@ -32,7 +32,7 @@ public class File {
     private LocalDateTime uploadedAt;
     
     @Column(name = "status")
-    private String status;
+    private byte status;
     
 
 

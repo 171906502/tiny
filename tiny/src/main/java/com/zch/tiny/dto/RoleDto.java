@@ -16,7 +16,6 @@ public class RoleDto {
     private String description;    
     private LocalDateTime createdAt;    
     private LocalDateTime updatedAt;    
-    private String status;    
 
     @JsonManagedReference("RoleDto")
     private Set<UserRoleDto> userRoles = new HashSet<>();

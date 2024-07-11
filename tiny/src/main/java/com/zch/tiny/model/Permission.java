@@ -29,7 +29,7 @@ public class Permission {
     private LocalDateTime updatedAt;
     
     @Column(name = "status")
-    private String status;
+    private byte status;
     
 
 

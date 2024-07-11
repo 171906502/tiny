@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.zch.tiny.enumeration.DepartmentStatusEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +37,8 @@ public class Department {
     private LocalDateTime updatedAt;
     
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private DepartmentStatusEnum status;
 
 
     @OneToMany(mappedBy = "department")
