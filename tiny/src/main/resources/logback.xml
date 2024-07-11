@@ -6,4 +6,25 @@
     <property name="LOG_FILE" value="./logs/tiny.log" />
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
+    <property name="LOG_REQUEST_FILE" value="./logs/request.log" />
+
+        <appender name="REQUEST_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_REQUEST_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_REQUEST_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+    
+    <logger name="REQUEST_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="REQUEST_FILE" />
+    </logger>
+
+
 </configuration>

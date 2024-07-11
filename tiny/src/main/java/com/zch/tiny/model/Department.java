@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,7 +39,6 @@ public class Department {
 
 
     @OneToMany(mappedBy = "department")
-    @JsonManagedReference("department")
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)

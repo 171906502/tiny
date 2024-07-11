@@ -35,7 +35,14 @@ public class RoleController {
     @PostMapping
     public RoleDto save(@RequestBody RoleDto dto) {
         Role entity = mapper.toEntity(dto);
-        return mapper.toDto(service.save(entity));
+        return mapper.toDto(service.carete(entity));
+    }
+
+
+    @PutMapping
+    public RoleDto update(@RequestBody RoleDto dto) {
+        Role entity = mapper.toEntity(dto);
+        return mapper.toDto(service.update(entity));
     }
 
     @DeleteMapping("/{id}")

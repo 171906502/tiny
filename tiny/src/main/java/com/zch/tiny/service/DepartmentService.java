@@ -31,6 +31,7 @@ public class DepartmentService {
     }
 
     public Department save(Department department) {
+        department.setDepartmentId(null);
         validateParentId(department.getParentId());
         validateUniqueDepartmentName(department.getDepartmentName(), department.getDepartmentId());
         return departmentRepository.save(department);

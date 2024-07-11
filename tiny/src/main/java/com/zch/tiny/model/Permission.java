@@ -16,9 +16,6 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer permissionId;
     
-    @Column(name = "permission_name")
-    private String permissionName;
-    
     @Column(name = "permission_code")
     private String permissionCode;
     

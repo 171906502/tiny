@@ -2,6 +2,9 @@ package com.zch.tiny.dto;
 
 import lombok.Data;
 import java.time.*;
+import java.util.List;
+
+import com.zch.tiny.model.Menu;
 
 @Data
 public class MenuDto {
@@ -15,5 +18,6 @@ public class MenuDto {
     private LocalDateTime createdAt;    
     private LocalDateTime updatedAt;    
     private String status;    
-
+    private String menuType;    
+    private List<Menu> children;
 }

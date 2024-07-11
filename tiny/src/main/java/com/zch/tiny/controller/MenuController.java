@@ -1,53 +1,46 @@
 package com.zch.tiny.controller;
 
-import com.zch.tiny.dto.MenuDto;
 import com.zch.tiny.model.Menu;
 import com.zch.tiny.service.MenuService;
-import com.zch.tiny.mapper.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/menus")
+@RequestMapping("/api/menus")
 public class MenuController {
 
     @Autowired
-    private MenuService service;
+    private MenuService menuService;
 
-    private final MenuMapper mapper = MenuMapper.INSTANCE;
+    @PostMapping
+    public Menu createMenu(@RequestBody Menu menu) throws Exception {
+        return menuService.createMenu(menu);
+    }
+
+    @PutMapping
+    public Menu updateMenu(@RequestBody Menu menu) throws Exception {
+        return menuService.updateMenu(menu);
+    }
 
     @GetMapping
-    public List<MenuDto> findAll() {
-        return service.findAll().stream()
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
+    public List<Menu> getAllMenus() {
+        return menuService.getAllMenus();
     }
 
     @GetMapping("/{id}")
-    public Optional<MenuDto> findById(@PathVariable Integer id) {
-        return service.findById(id).map(mapper::toDto);
-    }
-
-    @PostMapping
-    public MenuDto save(@RequestBody MenuDto dto) {
-        Menu entity = mapper.toEntity(dto);
-        return mapper.toDto(service.save(entity));
+    public Menu getMenuById(@PathVariable Integer id) {
+        return menuService.getMenuById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id) {
-        service.deleteById(id);
+    public void deleteMenu(@PathVariable Integer id) {
+        menuService.deleteMenu(id);
     }
 
-    @PostMapping("/search")
-    public List<MenuDto> findByExample(@RequestBody MenuDto dto) {
-        Menu example = mapper.toEntity(dto);
-        return service.findByExample(example).stream()
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
+    @GetMapping("/tree")
+    public List<Menu> getMenuTree() {
+        return menuService.getMenuTree();
     }
 }
