@@ -3,13 +3,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.stream.Collectors;
+import org.springframework.lang.Nullable;
+
 
 @Component
 public class LoggingRequestInterceptor implements HandlerInterceptor {
@@ -18,16 +24,16 @@ public class LoggingRequestInterceptor implements HandlerInterceptor {
 
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        // 包装请求
-        ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,@Nullable ModelAndView modelAndView) throws IOException {
+
+        ContentCachingRequestWrapper wrappedRequest = (ContentCachingRequestWrapper) request;
 
         String uri = wrappedRequest.getRequestURI();
         String method = wrappedRequest.getMethod();
         
         // 过滤文件上传请求
         if (isMultipartContent(wrappedRequest)) {
-            return true;
+            return;
         }
 
         StringBuilder params = new StringBuilder();
@@ -63,7 +69,6 @@ public class LoggingRequestInterceptor implements HandlerInterceptor {
 
         logRequest(uri, method, params.toString());
         request = wrappedRequest;
-        return true;
     }
 
     private void logRequest(String uri, String method, String params) {
@@ -74,4 +79,5 @@ public class LoggingRequestInterceptor implements HandlerInterceptor {
         String contentType = request.getContentType();
         return contentType != null && contentType.toLowerCase().startsWith("multipart/");
     }
+
 }
