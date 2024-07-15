@@ -15,7 +15,6 @@ import com.zch.tiny.model.AuthUser;
 
 import com.zch.tiny.repository.UserRepository;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 @Component
 public class UserDetailService implements UserDetailsService {
