@@ -24,3 +24,8 @@ logging:
             CommonsRequestLoggingFilter: DEBUG
 #        security:
 #          oauth2: TRACE
+
+minio:
+  endpoint: http://localhost:9000
+  accessKey: 0RQ0z1Ei3bpWeSWBsOaB
+  secretKey: 3eyuKi74NiBHXfCEVX4uEYC3LAGVehJOuNzCxbRQ

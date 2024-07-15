@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload with MinIO and Pre-signed URL</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Upload File to MinIO</h1>
+    <input type="file" id="fileInput" />
+    <button id="listFilesBtn">List Files</button>
+    <div id="imagePreview"></div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const fileName = file.name;
+
+            // Replace with your backend URL to generate pre-signed URL
+            const generatePresignedUrlEndpoint = `/generate-presigned-url?bucketName=my-bucket&objectName=${fileName}`;
+
+            // Request pre-signed URL from the backend
+            axios.get(generatePresignedUrlEndpoint)
+                .then(response => {
+                    const urls = JSON.parse(response.data);
+                    const presignedUrl = urls.uploadUrl;
+                    const viewUrl = urls.viewUrl;
+
+                    // Use the pre-signed URL to upload the file
+                    axios.put(presignedUrl, file, {
+                        headers: {
+                            'Content-Type': file.type
+                        }
+                    }).then(uploadResponse => {
+                        console.log('File uploaded successfully');
+                        
+                        // Display the uploaded image
+                        const img = document.createElement('img');
+                        img.src = viewUrl;
+                        img.style.maxWidth = '300px';
+                        document.getElementById('imagePreview').appendChild(img);
+                    }).catch(uploadError => {
+                        console.error('File upload error:', uploadError);
+                    });
+                }).catch(error => {
+                    console.error('Error generating pre-signed URL:', error);
+                });
+        });
+
+        document.getElementById('listFilesBtn').addEventListener('click', function() {
+            const listObjectsEndpoint = `/files/list-objects?bucketName=tiny`;
+
+            // Request the list of objects and their presigned URLs
+            axios.get(listObjectsEndpoint)
+                .then(response => {
+                    const urls = response.data;
+
+                    // Clear the existing preview
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.innerHTML = '';
+
+                    // Display each image
+                    urls.forEach(url => {
+                        const img = document.createElement('img');
+                        img.src = url;
+                        img.style.maxWidth = '300px';
+                        imagePreview.appendChild(img);
+                    });
+                }).catch(error => {
+                    console.error('Error listing objects:', error);
+                });
+        });
+    </script>
+</body>
+</html>

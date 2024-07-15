@@ -12,6 +12,5 @@ public class ScheduledTaskDto {
     private String taskScript;    
     private LocalDateTime createdAt;    
     private LocalDateTime updatedAt;    
-    private String status;    
 
 }

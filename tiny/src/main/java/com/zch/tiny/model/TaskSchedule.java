@@ -25,9 +25,6 @@ public class TaskSchedule {
     @Column(name = "end_time")
     private LocalDateTime endTime;
     
-    @Column(name = "status")
-    private String status;
-    
     @Column(name = "message")
     private String message;
     
